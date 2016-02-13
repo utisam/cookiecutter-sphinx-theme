@@ -1,0 +1,84 @@
+{% raw %}<!doctype html>
+
+{%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
+
+<html{% if language %} lang="{{ language }}"{% endif %}>
+<head>
+{%- block head %}
+  <meta charset="{{ encoding }}">
+  {%- block metatags %}
+  {%- endblock %}
+
+  <title>{%- block htmltitle %}{{ title|striptags|e }}{{ titlesuffix }}{%- endblock %}</title>
+
+  {%- block css %}
+  <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+  <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+  {%- for cssfile in css_files %}
+  <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+  {%- endfor %}
+  {%- endblock %}
+
+  {%- block linktags %}
+  {%- if favicon %}
+  <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+  {%- endif %}
+  {%- if hasdoc('about') %}
+  <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+  {%- endif %}
+  {%- if hasdoc('genindex') %}
+  <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+  {%- endif %}
+  {%- if hasdoc('search') %}
+  <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+  {%- endif %}
+  {%- if hasdoc('copyright') %}
+  <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+  {%- endif %}
+  <link rel="top" title="{{ docstitle|e }}" href="{{ pathto(master_doc) }}" />
+  {%- if parents %}
+  <link rel="up" title="{{ parents[-1].title|striptags|e }}" href="{{ parents[-1].link|e }}" />
+  {%- endif %}
+  {%- if next %}
+  <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+  {%- endif %}
+  {%- if prev %}
+  <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+  {%- endif %}
+  {%- endblock %}
+
+  {%- block extrahead %}{% endblock %}
+
+{%- endblock %}
+</head>
+<body>
+
+{%- block content %}
+  {%- include 'header.html' %}
+  {%- include 'relbar.html' %}
+  {%- include 'sidebar.html' %}
+  <main>
+    {%- block body %}{%- endblock %}
+  </main>
+  {%- include 'relbar.html' %}
+  {%- include 'footer.html' %}
+{%- endblock %}
+
+{%- block script %}
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    '{{ url_root }}',
+      VERSION:     '{{ release|e }}',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
+      HAS_SOURCE:  {{ has_source|lower }}
+    };
+  </script>
+
+  {%- for scriptfile in script_files %}
+  <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+  {%- endfor %}
+{%- endblock %}
+</body>
+
+</html>{% endraw %}

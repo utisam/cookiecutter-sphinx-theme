@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include {{cookiecutter.project_name|lower}} *.*
+recursive-exclude {{cookiecutter.project_name|lower}} .*.swp

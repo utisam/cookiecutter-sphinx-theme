@@ -1,0 +1,10 @@
+{% raw %}{%- if not sidebars %}
+  {#- default sidebar contets #}
+  {%- set sidebars = ['sidebar/logo.html', 'sidebar/localtoc.html', 'sidebar/relations.html', 'sidebar/searchbox.html', 'sidebar/sourcelink.html'] %}
+{%- endif %}
+
+<nav class="sidebar" aria-label="main navigation">
+  {%- for sidebartemplate in sidebars %}
+  {%- include sidebartemplate %}
+  {%- endfor %}
+</nav>{% endraw %}

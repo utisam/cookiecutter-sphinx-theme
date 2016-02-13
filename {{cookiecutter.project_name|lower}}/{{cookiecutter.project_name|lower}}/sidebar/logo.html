@@ -1,0 +1,6 @@
+{% raw %}{%- if logo %}
+<div class="logo">
+  <a href="{{ pathto(master_doc) }}">
+    <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/></a>
+</div>
+{%- endif %}{% endraw %}
